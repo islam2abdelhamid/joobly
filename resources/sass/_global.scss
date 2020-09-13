@@ -1,0 +1,12 @@
+.text-yellow {
+    color: $yellow;
+}
+.link {
+    color: #ffffff;
+    float: right;
+    font-weight: bold;
+    &:hover {
+        color: #ffffff;
+        text-decoration: underline !important;
+    }
+}

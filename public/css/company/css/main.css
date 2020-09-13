@@ -1,0 +1,120 @@
+body {
+    background: linear-gradient(180deg, #020024 0%, #090979 0%, #5f53ad 100%) no-repeat;
+}
+
+.navbar {
+    border-bottom: 2px solid #fff;
+}
+
+/* .navbar-nav .nav-item  */
+
+.navbar-nav .nav-item a {
+    color: #fff;
+    font-weight: bold;
+}
+
+.company-info {
+    margin-left: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-info a {
+    color: #fff;
+}
+
+.sub-nav .nav-item .nav-link {
+    color: #fff;
+}
+
+.sub-nav .nav-item .nav-link.active {
+    color: #d1b60b;
+}
+
+.service {
+    background-color: #ebebeb;
+    padding: 10px;
+    width: 80%;
+    margin-top: 8px;
+}
+
+.service p {
+    margin: 0;
+}
+
+.btn-default {
+    margin: 30px auto;
+    width: 50%;
+    background-color: #e4e4e4;
+}
+
+.company-form-container {
+    padding: 5px;
+    background-color: #fff;
+}
+
+.our-services h1 {
+    font-size: 48px;
+    position: relative;
+}
+
+.our-services h1.title {
+    position: relative;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+.our-services h1.title:before {
+    display: block;
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    margin-top: 10px;
+}
+.our-services h1.title:after {
+    margin-top: 10px;
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    max-width: 780px;
+    height: 3px;
+    background: linear-gradient(
+        to right,
+        #dfceb9 0%,
+        #dfceb9 45%,
+        rgba(0, 0, 0, 0) 45%,
+        rgba(0, 0, 0, 0) 55%,
+        #dfceb9 55%,
+        #dfceb9 100%
+    );
+}
+.our-services h1.title:before,
+h1.title:after {
+    position: absolute;
+    top: 100%;
+}
+
+.company {
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.company .info {
+    color: #777777;
+}
+
+.company .contact {
+    color: #979797;
+}
+
+.hr {
+    border: 2px solid rgb(122, 122, 122);
+}

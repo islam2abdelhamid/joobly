@@ -1,0 +1,79 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+@import "global";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+#app {
+    background: $mainBgColor;
+    position: relative;
+    z-index: 5;
+    height: 100%;
+
+    &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        background-image: url("/images/bottomBg.png");
+        background-repeat: no-repeat;
+        height: 15rem;
+        position: absolute;
+        bottom: 0;
+        z-index: -1;
+    }
+}
+
+.home-container,
+.base-container {
+    height: 100vh;
+    padding: 3rem;
+    &__subtitle {
+        font-size: 1.3rem;
+    }
+    &__service {
+        margin: 2rem 3rem;
+    }
+    &__start-link {
+        font-size: 1.5rem;
+        &:hover {
+            color: $orange;
+        }
+    }
+    &__service-active a {
+        color: $orange;
+    }
+}
+
+.services {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    .service {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .service-title {
+            margin-top: 0.5rem;
+            background-color: rgb(240, 240, 240);
+            padding: 0.7rem;
+            width: 8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 3.5rem;
+            border-radius: 0.3rem;
+            a {
+                color: #0f0f01;
+            }
+        }
+        .service-title.active a {
+            color: $yellow;
+        }
+    }
+}
