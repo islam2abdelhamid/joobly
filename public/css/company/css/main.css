@@ -39,10 +39,29 @@ body {
     margin-top: 8px;
 }
 
-.service p {
-    margin: 0;
+.service-type {
+    background-color: #ebebeb;
+    width: 18rem;
+    text-align: center;
+    padding: 8px;
 }
 
+.service p,
+.service-type p {
+    margin: 0;
+}
+.edit-btn {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: rgb(146, 146, 150);
+    padding: 5px 30px;
+}
+.edit-btn:hover {
+    color: #fff;
+}
+.wrap-text {
+    max-width: 250px;
+}
 .btn-default {
     margin: 30px auto;
     width: 50%;
@@ -59,12 +78,12 @@ body {
     position: relative;
 }
 
-.our-services h1.title {
+.our-services .title {
     position: relative;
     margin-bottom: 2rem;
     margin-top: 2rem;
 }
-.our-services h1.title:before {
+.our-services .title:before {
     display: block;
     content: "";
     width: 12px;
@@ -77,7 +96,7 @@ body {
     transform: translateX(-50%);
     margin-top: 10px;
 }
-.our-services h1.title:after {
+.our-services .title:after {
     margin-top: 10px;
     content: "";
     position: absolute;
@@ -96,8 +115,8 @@ body {
         #dfceb9 100%
     );
 }
-.our-services h1.title:before,
-h1.title:after {
+.our-services .title:before,
+.title:after {
     position: absolute;
     top: 100%;
 }

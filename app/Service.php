@@ -11,7 +11,7 @@ class Service extends Model
         'name', 'description', 'image',
     ];
 
-    public function companies()
+    public function company()
     {
         return $this->belongsToMany('App\Company');
     }

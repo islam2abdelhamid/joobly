@@ -1,0 +1,85 @@
+.text-yellow {
+    color: #f6993f;
+}
+.text-hover-yellow:hover {
+    color: #f6993f;
+}
+
+body {
+    background: linear-gradient(180deg, #020024 0%, #090979 0%, #5f53ad 100%);
+    position: relative;
+    z-index: 5;
+    height: 100%;
+}
+
+body::after {
+    content: "";
+    display: block;
+    width: 100%;
+    background-image: url("/images/bottomBg.png");
+    background-repeat: no-repeat;
+    height: 15rem;
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+}
+
+.home-container,
+.base-container {
+    height: 100vh;
+    padding: 3rem;
+}
+
+.home-container__subtitle {
+    font-size: 1.3rem;
+}
+
+.home-container__service {
+    margin: 2rem 3rem;
+}
+
+.home-container__start-link {
+    font-size: 1.5rem;
+}
+
+.home-container__start-link:hover {
+    color: #f6993f;
+}
+
+.home-container__service-active a {
+    color: #f6993f;
+}
+
+.services {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.services .service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.services .service .service-title {
+    margin-top: 0.5rem;
+    background-color: #f0f0f0;
+    padding: 0.7rem;
+    width: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 3.5rem;
+    border-radius: 0.3rem;
+}
+
+.services .service .service-title a {
+    color: #0f0f01;
+}
+
+.services .service .service-title.active a {
+    color: #d1b60b;
+}

@@ -19,8 +19,17 @@ return [
     'country' => 'Country',
     'category' => 'Category',
     'description' => 'Description',
-    'fillForm' => 'Fill out the form',
+    'fillForm' => 'Fill out the form to create offer page',
+    'fillContactForm' => 'Fill out the form to create offer contact form',
+    'createDiscount' => 'Create discount',
+    'discountDescription' => 'Write a line announcing the advantages of the offers',
+    'discounts' => 'Discounts',
+    'discount' => 'Discount',
+    'address' => 'Address',
+    'editServices' => 'Click to create service page',
     'ourServices' => 'Our Services',
+    'justCreatedServices' => 'You just created those services',
     'companyUpdated' => 'Company data updated successfully',
+    'serviceUpdated' => 'Service data updated successfully',
     'chooseServices' => 'Choose the services you provide (you can choose one or more services from each category)'
 ];

@@ -1,166 +1,219 @@
-@extends('layouts.company.logged')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
-<nav class="nav sub-nav">
-    <li class="nav-item">
-        <a class="nav-link" href="#">{{ trans('common.logout') }}</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" href="#">{{ trans('common.edit') }}</a>
-    </li>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</nav>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-@if(Session::has('serviceAddSuccess'))
-<div class="alert alert-success" role="alert">
-    {{ trans('common.'.Session::get('serviceAddSuccess')) }}
-</div>
-@endif
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-@if(Session::has('companyUpdated'))
-<div class="alert alert-success" role="alert">
-    {{ trans('company.'.Session::get('companyUpdated')) }}
-</div>
-@endif
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles -->
+    <link href="{{ asset('css/company/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/company/css/main.css') }}" rel="stylesheet">
 
+</head>
 
+<body>
+    <nav class="navbar navbar-expand-lg justify-content-between px-5">
+        <a class="navbar-brand" href="/"><img src="{{url('/images/logo.png')}}" alt="logo" class="img-fluid ml-5"
+                width="150" /></a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link link" href="#">
+                    {{ trans('common.english')}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link" href="#">
+                    {{ trans('common.arabic')}}
+                </a>
+            </li>
 
-<div class="container">
-    <p class="text-white">{{ trans('company.chooseServices') }}</p>
-
-    <form action="/company/services" method="POST">
-        @csrf
-        <div class="row">
-            <div class="col-md-6">
-                <div class="service text-center">
-                    <p>{{ trans('common.homeServices') }}</p>
-                </div>
-
-                @foreach ($services as $service)
-                @if ($service->type === 'homeServices' || $service->type === 'other')
-                <div class="service">
-                    <div class="form-check">
-                        <input id="my-input" class="form-check-input" type="checkbox" name="services[]"
-                            value={{$service->id}}>
-                        <label for="my-input" class="form-check-label">{{ 
-                            trans('services.'.$service->name) 
-                            }}</label>
-                    </div>
-                </div>
-                @endif
-                @endforeach
-
-            </div>
+            <li class="company-info">
+                <a class="nav-link link" href="#">
+                    {{Auth::user()->companyName}}
+                </a>
+                <img src="{{url('/images/company/')}}/{{Auth::user()->logo}}" class="img-fluid" width="50">
+            </li>
 
 
-            <div class="col-md-6">
-                <div class="service text-center">
-                    <p>{{ trans('common.commercialServices') }}</p>
+            {{-- {{Auth::user()->companyName}} --}}
+        </ul>
+    </nav>
+    <nav class="nav sub-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{ trans('common.logout') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">{{ trans('common.edit') }}</a>
+        </li>
 
-                </div>
-
-                @foreach ($services as $service)
-                @if ($service->type === 'commercialServices' || $service->type === 'other')
-                <div class="service">
-                    <div class="form-check">
-                        <input id="my-input" class="form-check-input" type="checkbox" name="services[]"
-                            value={{$service->id}}>
-                        <label for="my-input" class="form-check-label">{{ 
-                                        trans('services.'.$service->name) 
-                                        }}</label>
-                    </div>
-                </div>
-                @endif
-                @endforeach
+    </nav>
 
 
-            </div>
 
+    <div class="container">
 
+        @if(Session::has('serviceAddSuccess'))
+        <div class="alert alert-success" role="alert">
+            {{ trans('common.'.Session::get('serviceAddSuccess')) }}
         </div>
-        <button type="submit" class="btn btn-default btn-block">{{ trans('common.save') }}</button>
-    </form>
+        @endif
 
 
-    <div class="company-form">
-        <h5 class="text-white">{{ trans('company.fillForm') }}</h5>
-        <form action="{!! url('company/update', Auth::user()) !!}" method="POST" enctype="multipart/form-data">
+        <p class="text-white">{{ trans('company.chooseServices') }}</p>
+
+        <form action="/company/services" method="POST">
             @csrf
-            @method('PUT')
-            <div class="company-form-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="service text-center">
+                        <p>{{ trans('common.homeServices') }}</p>
+                    </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="address" placeholder="address">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="landTel" placeholder="phone">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="mobile" placeholder="mobile">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="email">
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("homeCleaning", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="homeServices-homeCleaning">
+                            <label for="my-input" class="form-check-label">{{ 
+                            trans('services.homeCleaning') 
+                            }}</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="companyName" placeholder="company name">
-                        </div>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <select class="form-control" name="category">
-                                    <option> {{ trans('common.serviceType') }} </option>
-                                    <option value="homeCleaning"> {{ trans('services.homeCleaning') }} </option>
-                                    <option value="babySitter"> {{ trans('services.babySitter') }} </option>
-                                    <option value="babySitter"> {{ trans('services.babySitter') }} </option>
-                                    <option value="elderlyHealthCare"> {{ trans('services.elderlyHealthCare') }}
-                                    </option>
-                                    <option value="gardening"> {{ trans('services.gardening') }} </option>
-                                    <option value="other"> {{ trans('services.other') }} </option>
-                                </select>
-                            </div>
-                            <input type="text" class="form-control" name="managerName" placeholder="manager name">
-                            <input type="file" class="form-control" name="image" placeholder="logo">
-                        </div>
-                        <div class="form-group ">
-                            <textarea class="form-control" name="description" rows="3"
-                                placeholder="about company"></textarea>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("elderlyHealthCare", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="homeServices-elderlyHealthCare">
+                            <label for="my-input" class="form-check-label">{{ 
+                            trans('services.elderlyHealthCare') 
+                            }}</label>
                         </div>
                     </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("babySitter", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="homeServices-babySitter">
+                            <label for="my-input" class="form-check-label">{{ 
+                            trans('services.babySitter') 
+                            }}</label>
+                        </div>
+                    </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("gardening", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="homeServices-gardening">
+                            <label for="my-input" class="form-check-label">{{ 
+                            trans('services.gardening') 
+                            }}</label>
+                        </div>
+                    </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("other", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]" value="homeServices-other">
+                            <label for="my-input" class="form-check-label">{{ 
+                            trans('services.other') 
+                            }}</label>
+                        </div>
+                    </div>
+
                 </div>
+
+
+                <div class="col-md-6">
+                    <div class="service text-center">
+                        <p>{{ trans('common.commercialServices') }}</p>
+                    </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("cleaningFacilities", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="commercialServices-cleaningFacilities">
+                            <label for="my-input" class="form-check-label">
+                                {{trans('services.cleaningFacilities')}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("transferIsolation", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="commercialServices-transferIsolation">
+                            <label for="my-input" class="form-check-label">
+                                {{trans('services.transferIsolation')}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("sterilization", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="commercialServices-sterilization">
+                            <label for="my-input" class="form-check-label">
+                                {{trans('services.sterilization')}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("receptionist", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="commercialServices-receptionist">
+                            <label for="my-input" class="form-check-label">
+                                {{trans('services.receptionist')}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="service">
+                        <div class="form-check">
+                            <input @if (in_array("other", $userServices)) checked @endif id="my-input"
+                                class="form-check-input" type="checkbox" name="services[]"
+                                value="commercialServices-other">
+                            <label for="my-input" class="form-check-label">
+                                {{trans('services.other')}}
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
             </div>
-            <button type="submit" class="btn text-white">{{ trans('common.save') }}</button>
+            <button type="submit" class="btn btn-default btn-block">{{ trans('common.next') }}</button>
         </form>
+
+
+
+
     </div>
 
 
 
-    <div class="our-services mt-5">
-        <h1 class="text-center text-white title">{{ trans('company.ourServices') }}</h1>
-        <p class="text-center text-white">
-            {{Auth::user()->description}}
-        </p>
-    </div>
+</body>
 
-
-
-    <div class="row">
-        @foreach (Auth::user()->services()->get() as $item)
-        <div class="col-md-4 text-center mt-3">
-            <img src="{{url('/images/services/'.$item->image)}}" alt="logo" class="img-fluid" width="150" />
-            <h5 class="text-white">{{$item->name}}</h5>
-            <p class="text-white">{{$item->description}}</p>
-        </div>
-        @endforeach
-    </div>
-
-
-</div>
-
-
-
-@endsection
+</html>

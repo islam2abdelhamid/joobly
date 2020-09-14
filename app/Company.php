@@ -16,6 +16,6 @@ class Company extends Authenticatable
 
     public function services()
     {
-        return $this->belongsToMany('App\Service');
+        return $this->hasMany('App\Service');
     }
 }

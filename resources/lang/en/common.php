@@ -11,10 +11,11 @@ return [
     'logout' => 'Logout',
     'next' => 'Next',
     'save' => 'Save',
-    'serviceAddSuccess' => 'Services added successfully',
+    'serviceAddSuccess' => 'Offer added successfully',
     'serviceType' => 'Service Type',
     'register'=>'Register',
     'login'=>'Login',
     'more'=>'More',
-    'home'=>'Home'
+    'home'=>'Home',
+    'logo'=>'Logo'
 ];

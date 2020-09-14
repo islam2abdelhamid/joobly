@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -59,61 +60,40 @@
 
     </nav>
 
-    {{-- @if(Session::has('serviceAddSuccess'))
-    <div class="alert alert-success" role="alert">
-        {{ trans('common.'.Session::get('serviceAddSuccess')) }}
-    </div>
-    @endif
-
-    @if(Session::has('companyUpdated'))
-    <div class="alert alert-success" role="alert">
-        {{ trans('company.'.Session::get('companyUpdated')) }}
-    </div>
-    @endif
-    --}}
-
-
 
 
     <div class="container">
-        <p class="text-white">{{ trans('company.justCreatedServices') }}</p>
-
-
-        <div class="mt-5">
-            <div class="service-type">
-                <p>{{ trans('common.homeServices') }}</p>
-            </div>
-            <div class="row">
-                @foreach (Auth::user()->services()->get() as $item)
-                @if ($item->type === 'homeServices')
-                <div class="col-md-4  mt-3">
-                    <img src="{{url('/images/services/'.$item->image)}}" alt="logo" class="img-fluid" width="225" />
-                    <p class="text-white wrap-text">{{ trans('services.'.$item->name) }}</p>
-                    <a href="/company/services/{{$item->id}}" class="edit-btn">{{ trans('company.editServices') }}</a>
-                </div>
-                @endif
-                @endforeach
-            </div>
+        @if(Session::has('serviceUpdated'))
+        <div class="alert alert-success" role="alert">
+            {{ trans('company.'.Session::get('serviceUpdated')) }}
         </div>
+        @endif
 
 
-        <div class="mt-5">
-            <div class="service-type">
-                <p>{{ trans('common.commercialServices') }}</p>
+        <div class="company-form mt-5">
+            <h5 class="text-white">{{ trans('company.createDiscount') }}</h5>
+            <div class="service-type mb-3">
+                <p>{{ trans('company.discounts') }}</p>
             </div>
-            <div class="row">
-                @foreach (Auth::user()->services()->get() as $item)
-                @if ($item->type === 'commercialServices')
-                <div class="col-md-4  mt-3">
-                    <img src="{{url('/images/services/'.$item->image)}}" alt="logo" class="img-fluid" width="225" />
-                    <p class="text-white wrap-text">{{ trans('services.'.$item->name) }}</p>
-                    <a href="/company/services/{{$item->id}}" class="edit-btn">{{ trans('company.editServices') }}</a>
+            <form action="/company/services/{{$service->id}}/contact" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="company-form-container">
+
+                    <div class="form-group ">
+                        <textarea class="form-control mt-3" name="discount_description" rows="3"
+                            placeholder="{{ trans('company.discountDescription') }}"></textarea>
+                    </div>
+
+                    {{-- 
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="contact_address" placeholder="address">
+                    </div> --}}
+
                 </div>
-                @endif
-                @endforeach
-            </div>
+                <button type="submit" class="btn text-white">{{ trans('common.save') }}</button>
+            </form>
         </div>
-
 
     </div>
 

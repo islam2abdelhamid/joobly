@@ -19,7 +19,12 @@ class CompanyController extends Controller
     public function index()
     {
         $services = Service::all();
-        return view('pages.companies.home',['services' => $services]);
+        $userServices = \Auth::user()->services()->get('name');
+        $userServicesNames = [];
+        foreach ($userServices as $key) {
+            array_push($userServicesNames, $key->name);
+        }
+        return view('pages.companies.home',['services' => $services,'userServices'=>$userServicesNames]);
     }
 
     /**
@@ -181,11 +186,11 @@ class CompanyController extends Controller
         return view('pages.companies.companies', ['companies' => $companies]);
     }
 
-    public function companyServices($id)
+    public function companyServices()
     {
-        $company = Company::findOrFail($id);
+        $services = \Auth::user()->services()->get();
 
-        return view('pages.companies.services', ['services' => $company->services()->get()]);
+        return view('pages.companies.services', ['services' => $services]);
 
     }
 }

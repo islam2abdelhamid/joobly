@@ -27,7 +27,7 @@ Route::get('/residential_services', function () {
 });
 
 Route::get('home_services/companies/{slug}','CompanyController@getCompaniesByCategory' );
-Route::get('home_services/companies/{id}/services','CompanyController@companyServices' );
+// Route::get('home_services/companies/{id}/services','CompanyController@companyServices' );
 
 // Auth::routes();
 
@@ -36,6 +36,12 @@ Route::group(['prefix' => 'company'], function () {
 
     Route::middleware(['assign.guard:company,company/login'])->group(function () {
     Route::get('home', 'CompanyController@index');        
+    Route::get('services', 'CompanyController@companyServices');        
+    Route::get('services/{id}', 'ServiceController@show');        
+    Route::put('services/{id}', 'ServiceController@update');        
+    Route::get('services/{id}/contact', 'ServiceController@showContactForm');        
+    Route::get('services/{id}/discount', 'ServiceController@showDiscountForm');        
+    Route::put('services/{id}/contact', 'ServiceController@updateContact');        
     Route::put('update/{company}', 'CompanyController@update');      
     Route::post('services', 'ServiceController@store');  
     });

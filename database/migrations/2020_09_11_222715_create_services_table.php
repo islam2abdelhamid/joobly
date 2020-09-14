@@ -15,10 +15,27 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('type', 255);
+            // $table->integer('company_id')->unsigned();
+             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
+            $table->string('name', 255)->nullable();
+            $table->string('type', 255)->nullable();
+            $table->string('email', 255)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->string('logo', 255)->default('company_logo.png')->nullable();
             $table->string('image', 255)->default('service.png');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('company_name', 255)->nullable();
+            $table->string('phone', 255)->nullable();
+            $table->string('mobile', 255)->nullable();
+            $table->text('about_company')->nullable();
+            $table->string('contact_company_name')->nullable();
+            $table->string('contact_address')->nullable();
+            $table->string('contact_phone')->nullable();
+            $table->string('contact_mobile')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->text('contact_social')->nullable();
+            $table->text('discount_description')->nullable();
+
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyServiceTable extends Migration
+class CreateDiscountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateCompanyServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_service', function (Blueprint $table) {
+        Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('company_id');
-            $table->integer('service_id');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateCompanyServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_service');
+        Schema::dropIfExists('discounts');
     }
 }
