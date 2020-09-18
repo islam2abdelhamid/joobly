@@ -21,8 +21,9 @@ class CreateServicesTable extends Migration
             $table->string('type', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('address', 255)->nullable();
-            $table->string('logo', 255)->default('company_logo.png')->nullable();
-            $table->string('image', 255)->default('service.png');
+            $table->boolean('isActive', 255)->default(false);
+            $table->string('logo', 255)->default('default.png')->nullable();
+            $table->string('image', 255)->default('default.png')->nullable();
             $table->text('description')->nullable();
             $table->string('company_name', 255)->nullable();
             $table->string('phone', 255)->nullable();
@@ -34,8 +35,6 @@ class CreateServicesTable extends Migration
             $table->string('contact_mobile')->nullable();
             $table->string('contact_email')->nullable();
             $table->text('contact_social')->nullable();
-            $table->text('discount_description')->nullable();
-
             $table->timestamps();
         });
     }

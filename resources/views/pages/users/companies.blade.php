@@ -1,3 +1,4 @@
+@include('pages.users.includes.header')
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4">
@@ -19,37 +20,39 @@
 
             </div>
             <hr class="hr" />
+
+            @if (count($companies)>0)
             @foreach ($companies as $company)
 
-            <div class="company">
+            <div class="company mt-5">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="{{url('/images/company/'.$company->logo)}}" class="img-fluid" width="110">
+                        <img src="{{url('/images/company/services/'.$company->logo)}}" class="img-fluid" width="110">
                     </div>
                     <div class="col-md-5">
                         <div class="info">
                             <h3>
-                                {{$company->companyName}}
+                                {{$company->company_name}}
                             </h3>
                             <p>
                                 {{$company->description}}
                             </p>
-                            <a href={{$company->id."/services"}}>
+                            <a href="/companies/{{$company->id}}">
                                 {{ trans('common.more') }}
                             </a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="contact">
-                            {{ trans('company.address') }}:
-                            <br />
-                            {{$company->address}}
-                            <br />
-                            <br />
-
-                            <strong class="text-dark">
-                                {{$company->mobile}} / {{$company->landTel}}
+                            <strong>
+                                {{ trans('company.address') }}:
                             </strong>
+                            {{$company->address}}
+                            <br>
+                            <strong>
+                                {{ trans('company.contactInfo') }}:
+                            </strong>
+                            {{$company->mobile}} / {{$company->phone}}
 
                         </div>
                     </div>
@@ -59,6 +62,16 @@
             </div>
 
             @endforeach
+
+            @else
+            <h3 class="text-white">
+                {{ trans('company.noCompanies') }}
+            </h3>
+
+            @endif
+
+
         </div>
     </div>
 </div>
+@include('pages.users.includes.footer')

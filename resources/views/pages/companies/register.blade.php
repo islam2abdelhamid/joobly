@@ -8,8 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>{{ trans('common.webisteName')}}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -71,68 +70,55 @@
             <form class="form-group" action="/company/register" method="POST">
                 @csrf
                 <label><i class="fas fa-star-of-life"></i>{{ trans('company.managerName')}}</label>
-                <input type="text" class="form-control" name="managerName"
+                <input required type="text" class="form-control" name="managerName"
                     placeholder={{ trans('company.managerName')}}>
 
                 <label><i class="fas fa-star-of-life"></i>{{ trans('company.companyName')}}</label>
-                <input type="text" class="form-control" name="companyName"
+                <input required type="text" class="form-control" name="companyName"
                     placeholder={{ trans('company.companyName')}}>
 
 
                 <div class="row">
                     <div class="col-md-6">
                         <label><i class="fas fa-star-of-life"></i>{{ trans('company.mobileNumber')}}</label>
-                        <input type="text" class="form-control" name="mobile"
+                        <input required type="text" class="form-control" name="mobile"
                             placeholder={{ trans('company.mobileNumber')}}>
                     </div>
                     <div class="col-md-6">
                         <label><i class="fas fa-star-of-life"></i>{{ trans('company.landTel')}}</label>
-                        <input type="text" class="form-control" name="landTel"
+                        <input required type="text" class="form-control" name="landTel"
                             placeholder={{ trans('company.landTel')}}>
                     </div>
                 </div>
 
                 <label><i class="fas fa-star-of-life"></i>{{ trans('company.email')}}</label>
-                <input type="email" class="form-control" name="email" placeholder={{ trans('company.email')}}>
+                <input required type="email" class="form-control" name="email" placeholder={{ trans('company.email')}}>
 
 
                 <div class="row">
                     <div class="col-md-4">
                         <label class="mt-2 mt-lg-0">* {{ trans('company.country')}}</label>
-                        <select class="selectpicker form-control" name="country">
-                            <option>South Africa</option>
-                            <option>Cameron</option>
-                            <option>Kenyan</option>
-                        </select>
+                        <input required type="text" class="form-control" name="country"
+                            placeholder={{ trans('company.country')}}>
                     </div>
+
                     <div class="col-md-4">
                         <label class="mt-2 mt-lg-0">* {{ trans('company.city')}}</label>
-                        <select class="selectpicker form-control" name="city">
-                            <option>South Africa</option>
-                            <option>Cameron</option>
-                            <option>Kenyan</option>
-                        </select>
+                        <input required type="text" class="form-control" name="city"
+                            placeholder={{ trans('company.city')}}>
                     </div>
-                    <div class="col-md-4">
-                        <label class="mt-2">{{ trans('company.address')}}</label>
-                        <input type="text" class="form-control" placeholder={{ trans('company.address')}}
-                            name="address">
-                    </div>
-                </div>
-                <label class="mt-2 mt-lg-0">* {{ trans('company.category')}}</label>
 
-                <select class="selectpicker form-control" name="category">
-                    <option> {{ trans('common.serviceType') }} </option>
-                    <option value="homeCleaning"> {{ trans('services.homeCleaning') }} </option>
-                    <option value="babySitter"> {{ trans('services.babySitter') }} </option>
-                    <option value="elderlyHealthCare"> {{ trans('services.elderlyHealthCare') }}
-                    </option>
-                    <option value="gardening"> {{ trans('services.gardening') }} </option>
-                    <option value="other"> {{ trans('services.other') }} </option>
-                </select>
+                    <div class="col-md-4">
+                        <label class="mt-2 mt-lg-0">* {{ trans('company.address')}}</label>
+                        <input required type="text" class="form-control" name="address"
+                            placeholder={{ trans('company.address')}}>
+                    </div>
+
+                </div>
 
                 <label><i class="fas fa-star-of-life"></i> {{ trans('company.password')}}</label>
-                <input type="password" class="form-control" placeholder={{ trans('company.password')}} name="password">
+                <input required type="password" class="form-control" placeholder={{ trans('company.password')}}
+                    name="password">
 
                 <label><i class="fas fa-star-of-life"></i> {{ trans('company.description')}}</label>
                 <textarea class="form-control" name="description"></textarea>
@@ -146,6 +132,15 @@
         </div>
     </div>
     </div>
+
+
+    <script>
+        async function fetchCountries() {
+          let response = await fetch('http://country.io/names.json');
+            console.log(response);  
+        } 
+        fetchCountries();
+    </script>
 </body>
 
 </html>

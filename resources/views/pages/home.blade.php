@@ -8,8 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>{{ trans('common.webisteName')}}</title>
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/users/home.css') }}" rel="stylesheet">
@@ -17,6 +16,7 @@
 
 <body>
     <div class="container home-container">
+        <a href="/company/" class="text-white mr-3">{{ trans('common.company')}}</a>
         <a href="#" class="text-white">{{ trans('common.arabic')}}</a>
         <div class="d-flex flex-column justify-content-center align-items-center">
             <img src="{{url('/images/logo.png')}}" alt="logo" class="img-fluid ml-5" width="250" />

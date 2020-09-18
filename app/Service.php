@@ -13,6 +13,16 @@ class Service extends Model
 
     public function company()
     {
-        return $this->belongsToMany('App\Company');
+        return $this->belongsTo('App\Company');
+    }
+
+    public function members()
+    {
+        return $this->hasMany('App\Team');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
     }
 }

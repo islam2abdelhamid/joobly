@@ -22,11 +22,12 @@ class CreateCompaniesTable extends Migration
             $table->string('mobile', 255);
             $table->string('email', 255);
             $table->string('logo', 250)->default('companyLogo.png');
+            $table->string('image', 250)->default('companyProfile.png');
             $table->string('country', 250);
             $table->string('city', 250);
             $table->string('address', 250);
-            $table->string('category', 250);
             $table->string('password');
+            $table->text('discount_description')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

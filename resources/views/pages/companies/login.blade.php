@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ trans('common.webisteName')}}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -74,11 +74,12 @@
 
 
                 <label><i class="fas fa-star-of-life"></i>{{ trans('company.email')}}</label>
-                <input type="email" class="form-control" name="email" placeholder={{ trans('company.email')}}>
+                <input required type="email" class="form-control" name="email" placeholder={{ trans('company.email')}}>
 
 
                 <label><i class="fas fa-star-of-life"></i> {{ trans('company.password')}}</label>
-                <input type="password" class="form-control" placeholder={{ trans('company.password')}} name="password">
+                <input required type="password" class="form-control" placeholder={{ trans('company.password')}}
+                    name="password">
 
 
 

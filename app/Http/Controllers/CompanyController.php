@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Service;
+use App\Discount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,8 +35,23 @@ class CompanyController extends Controller
      */
     public function register()
     {
+         if (\Auth::guard('company')->user()) {
+            return redirect('/company/home');
+        }
         return view('pages.companies.register');
     }
+
+
+    public function getService($id ,$serviceId)
+    {
+        
+        $services = Company::findOrFail($id)->services()->where('isActive',true)->get();
+        $service = Service::findOrFail($serviceId);
+        return view('pages.users.service', ['service' => $service, 'services'=>$services]);
+
+    }
+
+
 
 
       /**
@@ -44,7 +60,9 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function login()
-    {
+    {    if (\Auth::guard('company')->user()) {
+            return redirect('/company/home');
+        }
         return view('pages.companies.login');
     }
 
@@ -59,7 +77,6 @@ class CompanyController extends Controller
          $validatedData = $request->validate([
             'managerName' => 'required|max:255',
             'companyName' => 'required|max:255',
-            'category' => 'required|max:255',
             'mobile' => 'required|max:255',
             'description' => 'required',
             'landTel' => 'required|max:255',
@@ -121,9 +138,13 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($id)
     {
-        //
+        $company = Service::findOrFail($id)->company()->first();
+        $services = $company->services()->where('isActive',true)->get();
+
+        return view('pages.users.company', ['company' => $company, 'services'=>$services]);
+
     }
 
     /**
@@ -171,9 +192,50 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function updateCompany(Request $request)
     {
-        //
+
+        $company = \Auth::user();
+
+
+        
+        if ($request->file('image')) {
+            
+            $image = $request->file('image');
+            $name = str_replace(' ', '', $request->companyName).'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/company');
+            $image->move($destinationPath, $name);
+            $company->image = $name;
+        }
+
+
+         if ($request->file('logo')) {
+            
+            $image = $request->file('logo');
+            $name = str_replace(' ', '', $request->companyName).'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/company');
+            $image->move($destinationPath, $name);
+            $company->logo = $name;
+        }
+
+
+        $company->companyName = $request->companyName;
+        $company->description = $request->description;
+        $company->managerName = $request->managerName;
+        $company->landTel = $request->landTel;
+        $company->mobile = $request->mobile;
+        $company->mobile = $request->mobile;
+        $company->email = $request->email;
+        $company->country = $request->country;
+        $company->city = $request->city;
+        $company->address = $request->address;
+        $company->password = Hash::make($request['password']);
+
+        $company->save();
+        
+        return redirect('/company')->with('profileUpdated','profileUpdated');
+
+        
     }
 
      protected function guard()
@@ -182,8 +244,8 @@ class CompanyController extends Controller
     }
 
     public function getCompaniesByCategory($slug){
-        $companies = \DB::table('companies')->where('category', $slug)->get();
-        return view('pages.companies.companies', ['companies' => $companies]);
+        $companies = \DB::table('services')->where(['name'=>$slug,'isActive'=>true])->get();
+        return view('pages.users.companies', ['companies' => $companies]);
     }
 
     public function companyServices()
@@ -192,5 +254,54 @@ class CompanyController extends Controller
 
         return view('pages.companies.services', ['services' => $services]);
 
+    }
+
+    public function companyOrders()
+    {
+        $orders = \Auth::user()->orders()->get();
+
+        return view('pages.companies.orders', ['orders' => $orders]);
+
+    }
+
+     public function updateDiscount(Request $request)
+    {
+        $company = \Auth::user();
+        $company->discount_description = $request->discount_description;
+        $company->save();
+        $company->discounts()->delete();
+
+        if($request->discount1){
+            $discount = new Discount();
+            $discount->name = $request->discount1[0];
+            $discount->color = $request->discount1[1];
+            $company->discounts()->save($discount);
+         
+        }
+
+        if($request->discount2){
+            $discount = new Discount();
+            $discount->name = $request->discount2[0];
+            $discount->color = $request->discount2[1];
+            $company->discounts()->save($discount);
+          
+        }
+
+        if($request->discount3){
+            $discount = new Discount();
+            $discount->name = $request->discount3[0];
+            $discount->color = $request->discount3[1];
+            $company->discounts()->save($discount);
+          
+        }
+
+        return redirect('/company')->with('discountAdded','discountAdded');
+
+    }
+    
+
+    public function logout(Request $request) {
+        \Auth::logout();
+        return redirect('/company/login');
     }
 }

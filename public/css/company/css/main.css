@@ -1,5 +1,6 @@
 body {
     background: linear-gradient(180deg, #020024 0%, #090979 0%, #5f53ad 100%) no-repeat;
+    min-height: 100vh;
 }
 
 .navbar {
@@ -136,4 +137,97 @@ body {
 
 .hr {
     border: 2px solid rgb(122, 122, 122);
+}
+
+.white-hr {
+    border: 2px solid rgb(252, 252, 252);
+}
+
+.book-form {
+    max-width: 700px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.book-btn {
+    color: #fff;
+    background-color: #4ba0e8;
+    border-radius: 30px;
+    padding: 7px 35px;
+    margin: 15px auto;
+}
+
+.contact-info {
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.705);
+}
+
+.contact-info .item {
+    margin-top: 1rem;
+}
+
+.footer {
+    margin-top: 3rem;
+    background-color: #fff;
+    padding: 2rem;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li a {
+    color: #000000;
+}
+
+.social #facebook-link,
+.social #facebook-link:visited {
+    color: #3b5998;
+}
+.social #google-plus-link,
+.social #google-plus-link:visited {
+    color: #d34836;
+}
+.social #twitter-link,
+.social #twitter-link:visited {
+    color: #55acee;
+}
+.social #linkedin-link,
+.social #linkedin-link:visited {
+    color: #0077b5;
+}
+
+.social .icon-container {
+    font-size: 2rem;
+}
+
+.icon-container a,
+.icon-container a:hover,
+.icon-container a:active {
+    text-decoration: none;
+}
+
+.social #facebook-link:hover,
+.social #facebook-link:active {
+    color: #5772ac;
+}
+.social #google-plus-link:hover,
+.social #google-plus-link:active {
+    color: #ec6d5c;
+}
+.social #twitter-link:hover,
+.social #twitter-link:active {
+    color: #7cc0f4;
+}
+.social #linkedin-link:hover,
+.social #linkedin-link:active {
+    color: #01a6ff;
+}
+
+.copy-rights {
+    padding: 0.5rem 1rem;
+    background-color: #000000;
+    color: #fff;
 }
