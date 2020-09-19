@@ -133,14 +133,6 @@
     </div>
     </div>
 
-
-    <script>
-        async function fetchCountries() {
-          let response = await fetch('http://country.io/names.json');
-            console.log(response);  
-        } 
-        fetchCountries();
-    </script>
 </body>
 
 </html>
