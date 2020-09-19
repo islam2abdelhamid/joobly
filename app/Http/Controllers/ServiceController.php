@@ -12,25 +12,6 @@ use Illuminate\Support\Facades\Mail;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,18 +20,18 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         \Auth::user()->services()->delete();
-        
+
         foreach ($request->services as $service) {
-            $explodedService = explode("-",$service);
+            $explodedService = explode("-", $service);
             $newService = new Service();
             $newService->type = $explodedService[0];
             $newService->name = $explodedService[1];
             \Auth::user()->services()->save($newService);
         }
 
-        return redirect('/company/services');
+        return redirect('/' . \App::getLocale() . '/company/services');
     }
 
     /**
@@ -62,7 +43,7 @@ class ServiceController extends Controller
     public function show($id)
     {
         $service =  Service::findOrFail($id);
-        return view('pages.companies.service',['service'=>$service]);
+        return view('pages.companies.service', ['service' => $service]);
     }
 
     /**
@@ -74,13 +55,13 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service = Service::findOrFail($id);
-        return view('pages.companies.service_edit',['service'=>$service]);
+        return view('pages.companies.service_edit', ['service' => $service]);
     }
 
     public function editTeam($id)
     {
         $service = Service::findOrFail($id);
-        return view('pages.companies.service_team',['service'=>$service]);
+        return view('pages.companies.service_team', ['service' => $service]);
     }
 
     /**
@@ -94,24 +75,23 @@ class ServiceController extends Controller
     {
 
         $service = Service::findOrFail($id);
-        
+
         if ($request->file('logo')) {
-            
+
             $image = $request->file('logo');
-            $name = str_replace(' ', '', $request->company_name).'.'.$image->getClientOriginalExtension();
+            $name = str_replace(' ', '', $request->company_name) . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images/company/services');
             $image->move($destinationPath, $name);
             $service->logo = $name;
         }
 
         if ($request->file('image')) {
-            
+
             $image = $request->file('image');
-            $name = str_replace(' ', '', $request->company_name).'-profile.'.$image->getClientOriginalExtension();
+            $name = str_replace(' ', '', $request->company_name) . '-profile.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images/company/services');
             $image->move($destinationPath, $name);
             $service->image = $name;
-
         }
 
         $service->address = $request->address;
@@ -123,30 +103,16 @@ class ServiceController extends Controller
         $service->about_company = $request->about_company;
 
         $service->save();
-        return redirect('company/services/'.$id.'/team')->with('serviceAddSuccess','serviceAddSuccess');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Service $service)
-    {
-        //
+        return redirect('/' . \App::getLocale() . '/company/services/' . $id . '/team')->with('serviceAddSuccess', 'serviceAddSuccess');
     }
 
     public function showContactForm($id)
     {
-        
+
         $service = Service::findOrFail($id);
 
-        return view('pages.companies.service_contact',['service'=>$service]);
-
+        return view('pages.companies.service_contact', ['service' => $service]);
     }
-
-   
 
     public function updateContact($id, Request $request)
     {
@@ -160,34 +126,32 @@ class ServiceController extends Controller
         $service->isActive = true;
         $service->save();
 
-         return redirect('company/services/'.$id)->with('serviceUpdated','serviceUpdated');
+        return redirect('/' . \App::getLocale() . '/company/services/' . $id)->with('serviceUpdated', 'serviceUpdated');
     }
 
-    public function updateTeam($id, Request $request) {
+    public function updateTeam($id, Request $request)
+    {
 
         $service = Service::findOrFail($id);
-    
+
         $service->description = $request->description;
         $service->save();
-        
-        if($request->hasfile('images'))
-         {
+
+        if ($request->hasfile('images')) {
             $service->members()->delete();
-            foreach($request->file('images') as $file)
-            {
-                $name = time().'.'.$file->extension();
-                $file->move(public_path().'/images/company/services/teams', $name);
+            foreach ($request->file('images') as $file) {
+                $name = time() . '.' . $file->extension();
+                $file->move(public_path() . '/images/company/services/teams', $name);
                 $team = new Team();
                 $team->image = $name;
                 $service->members()->save($team);
             }
-
-         }
-        return redirect('company/services/'.$id.'/contact')->with('serviceAddSuccess','serviceAddSuccess');
-
+        }
+        return redirect('/' . \App::getLocale() . '/company/services/' . $id . '/contact')->with('serviceAddSuccess', 'serviceAddSuccess');
     }
 
-    public function book(Request $request){
+    public function book(Request $request)
+    {
         $order = new Order();
         $order->name = $request->name;
         $order->address = $request->address;
@@ -201,6 +165,6 @@ class ServiceController extends Controller
         $company = $service->company()->first();
 
         $company->orders()->save($order);
-        return redirect()->back()->with('orderSuccess','orderSuccess');
+        return redirect()->back()->with('orderSuccess', 'orderSuccess');
     }
 }

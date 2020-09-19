@@ -11,7 +11,7 @@
             {{ trans('services.'.$service->name) }}
         </h3>
     </div>
-    <form action="/company/services/{{$service->id}}/team" method="POST" enctype="multipart/form-data"
+    <form action="/{{App::getLocale()}}/company/services/{{$service->id}}/team" method="POST" enctype="multipart/form-data"
         enctype="multipart/form-data">
         <div class="company-form">
             @csrf

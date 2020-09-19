@@ -36,7 +36,7 @@
     @endif
 
     <hr class="white-hr">
-    <a href="/company/services/{{$service->id}}/edit" class="text-white">{{ trans('common.edit') }}</a>
+    <a href="/{{App::getLocale()}}/company/services/{{$service->id}}/edit" class="text-white">{{ trans('common.edit') }}</a>
 </div>
 
 

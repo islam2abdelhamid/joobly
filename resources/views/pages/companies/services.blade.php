@@ -14,10 +14,10 @@
             <div class="col-md-4  mt-3">
                 <img src="{{url('/images/company/services/'.$item->image)}}" alt="logo" class="img-fluid" width="225" />
                 <div class="my-3">
-                    <a href="/company/services/{{$item->id}}"
+                    <a href="/{{App::getLocale()}}/company/services/{{$item->id}}"
                         class="text-white">{{ trans('services.'.$item->name) }}</a>
                 </div>
-                <a href="/company/services/{{$item->id}}/edit" class="edit-btn">{{ trans('company.editServices') }}</a>
+                <a href="/{{App::getLocale()}}/company/services/{{$item->id}}/edit" class="edit-btn">{{ trans('company.editServices') }}</a>
             </div>
             @endif
             @endforeach
@@ -35,7 +35,7 @@
             <div class="col-md-4  mt-3">
                 <img src="{{url('/images/company/services/'.$item->image)}}" alt="logo" class="img-fluid" width="225" />
                 <p class="text-white wrap-text">{{ trans('services.'.$item->name) }}</p>
-                <a href="/company/services/{{$item->id}}/edit" class="edit-btn">{{ trans('company.editServices') }}</a>
+                <a href="/{{App::getLocale()}}/company/services/{{$item->id}}/edit" class="edit-btn">{{ trans('company.editServices') }}</a>
             </div>
             @endif
             @endforeach

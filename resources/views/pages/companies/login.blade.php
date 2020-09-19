@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <form class="form-group" action="/company/login" method="POST">
+            <form class="form-group" action="/{{App::getLocale()}}/company/login" method="POST">
                 @csrf
 
 

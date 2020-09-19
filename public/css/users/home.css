@@ -6,7 +6,7 @@
 }
 
 body {
-    background: linear-gradient(180deg, #020024 0%, #090979 0%, #5f53ad 100%);
+    background-image: linear-gradient(to right top, #051937, #133a62, #1b5f8f, #1c87bd, #12b2eb);
     position: relative;
     z-index: 5;
     height: 100%;

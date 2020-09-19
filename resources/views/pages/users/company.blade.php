@@ -23,10 +23,10 @@
             <div class="col-md-4  mt-3 text-center">
                 <img src="{{url('/images/company/services/'.$item->image)}}" alt="logo" class="img-fluid" width="225" />
                 <div class="my-1">
-                    <a href="/companies/{{$company->id}}/services/{{$item->id}}"
+                    <a href="/{{App::getLocale()}}/companies/{{$company->id}}/services/{{$item->id}}"
                         class="text-white">{{ trans('services.'.$item->name) }}</a>
                 </div>
-                <a href="/companies/{{$company->id}}/services/{{$item->id}}"
+                <a href="/{{App::getLocale()}}/companies/{{$company->id}}/services/{{$item->id}}"
                     class="text-white">{{ trans('common.learnMore') }}</a>
             </div>
             @endforeach

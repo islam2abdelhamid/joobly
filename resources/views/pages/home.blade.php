@@ -10,14 +10,34 @@
 
     <title>{{ trans('common.webisteName')}}</title>
     <!-- Styles -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('images//favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images//favicon.ico') }}" type="image/x-icon">
+
+    @if (App::getLocale() === 'ar')
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
+        integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
+        <style>
+            html {
+                direction: rtl;
+            }
+        </style>
+    @else
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    @endif
     <link href="{{ asset('css/users/home.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <div class="container home-container">
-        <a href="/company/" class="text-white mr-3">{{ trans('common.company')}}</a>
-        <a href="#" class="text-white">{{ trans('common.arabic')}}</a>
+
+        <a href="/{{App::getLocale()}}/company/" class="text-white mr-3">{{ trans('common.company')}}</a>
+        @if (App::getLocale()==='ar')
+        <a href="/en" class="text-white">{{ trans('common.english')}}</a>
+        @else
+        <a href="/ar" class="text-white">{{ trans('common.arabic')}}</a>
+        @endif
+
         <div class="d-flex flex-column justify-content-center align-items-center">
             <img src="{{url('/images/logo.png')}}" alt="logo" class="img-fluid ml-5" width="250" />
             <h1 class="text-center text-white text-uppercase mt-3">
@@ -42,7 +62,7 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <a href="/get_started"
+            <a href="/{{App::getLocale()}}/get_started"
                 class="text-center text-yellow home-container__start-link">{{ trans('home.getStarted')}}</a>
         </div>
     </div>

@@ -17,7 +17,7 @@
 
     <p class="text-white">{{ trans('company.chooseServices') }}</p>
 
-    <form action="/company/services" method="POST">
+    <form action="/{{App::getLocale()}}/company/services" method="POST">
         @csrf
         <div class="row">
             <div class="col-md-6">

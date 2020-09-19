@@ -13,7 +13,7 @@
             <p>{{ trans('company.address') }}</p>
         </div>
         <h5 class="text-white">{{ trans('company.fillContactForm') }}</h5>
-        <form action="/company/services/{{$service->id}}/contact" method="POST" enctype="multipart/form-data">
+        <form action="/{{App::getLocale()}}/company/services/{{$service->id}}/contact" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="company-form-container">

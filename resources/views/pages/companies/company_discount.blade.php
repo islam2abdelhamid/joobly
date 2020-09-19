@@ -10,7 +10,7 @@
             <p>{{ trans('company.discounts') }}</p>
         </div>
 
-        <form action="/company/discounts" method="POST" enctype="multipart/form-data">
+        <form action="/{{App::getLocale()}}/company/discounts" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="company-form-container">
@@ -31,44 +31,41 @@
 
                 <p>{{ trans('company.addDiscount') }}</p>
                 <div class="row">
-
-
-
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input required type="text" class="form-control" name="discount1[]" placeholder="title"
+                            <input required type="text" class="form-control" name="discount1[]"
+                                placeholder="{{ trans('placeholders.title') }}"
                                 value="{{count(Auth::user()->discounts()->get())>0 ?Auth::user()->discounts()->get()[0]->name:''}}">
                         </div>
                         <div class="form-group">
                             <label>{{ trans('company.color') }} :</label>
                             <input required type="color" class="form-control" name="discount1[]"
-                                placeholder="first discount"
                                 value="{{count(Auth::user()->discounts()->get())>0 ?Auth::user()->discounts()->get()[0]->color:''}}">
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input required type="text" class="form-control" name="discount2[]" placeholder="title"
+                            <input required type="text" class="form-control" name="discount2[]"
+                                placeholder="{{ trans('placeholders.title') }}"
                                 value="{{count(Auth::user()->discounts()->get())>0 ?Auth::user()->discounts()->get()[1]->name:''}}">
                         </div>
                         <div class="form-group">
                             <label>{{ trans('company.color') }} :</label>
                             <input required type="color" class="form-control" name="discount2[]"
-                                placeholder="first discount"
                                 value="{{count(Auth::user()->discounts()->get())>0 ?Auth::user()->discounts()->get()[1]->color:''}}">
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input required type="text" class="form-control" name="discount3[]" placeholder="title"
+                            <input required type="text" class="form-control" name="discount3[]"
+                                placeholder="{{ trans('placeholders.title') }}"
                                 value="{{count(Auth::user()->discounts()->get())>0 ?Auth::user()->discounts()->get()[2]->name:''}}">
                         </div>
                         <div class="form-group">
                             <label>{{ trans('company.color') }} :</label>
                             <input required type="color" class="form-control" name="discount3[]"
-                                placeholder="first discount"
                                 value="{{count(Auth::user()->discounts()->get())>0 ?Auth::user()->discounts()->get()[2]->color:''}}">
                         </div>
                     </div>

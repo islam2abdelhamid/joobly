@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <form class="form-group" action="/company/register" method="POST">
+            <form class="form-group" action="/{{App::getLocale()}}/company/register" method="POST">
                 @csrf
                 <label><i class="fas fa-star-of-life"></i>{{ trans('company.managerName')}}</label>
                 <input required type="text" class="form-control" name="managerName"

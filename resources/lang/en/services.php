@@ -14,7 +14,6 @@ return [
     'cleaningFacilities' => 'Internal and external cleaning of facilities',
     'transferIsolation' => 'Transfer and Isolation (Internal - External)',
     'reception' => 'Reception (Restaurants - Hotels - Offices - Clinics)',
-    'hospitality' => 'Hospitality (Restaurants - Hotels)',
-    'sterilization' => 'Sterilization, disinfection, and pest and animal control
-',
+    'hospitality' => 'Hospitality',
+    'sterilization' => 'Sterilization',
 ];

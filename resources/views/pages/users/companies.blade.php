@@ -2,7 +2,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4">
-            <img src="{{url('/images/ads/ad1.png')}}" class="img-fluid" width="250">
+            <img src="{{url('/images/google/google123.png')}}" class="img-fluid" width="250">
         </div>
         <div class="col-md-8">
 
@@ -10,11 +10,12 @@
                 <a href="/" class="text-white">{{ trans('common.home') }}</a>/
                 <?php $link = "" ?>
                 @for($i = 1; $i <= count(Request::segments()); $i++) @if($i < count(Request::segments()) & $i> 0)
-                    @if (Request::segment($i)!=="companies")
-                    <?php $link .= "/" . Request::segment($i); ?>
+                    @if (Request::segment($i)!=="companies" && Request::segment($i)!=="en" &&
+                    Request::segment($i)!=="ar")
+                    <?php $link .= '/'. \App::getLocale()."/" . Request::segment($i); ?>
                     <a href="<?= $link ?>" class="text-white">{{ trans('common.'.Request::segment($i)) }}</a> /
                     @endif
-                    @else {{ucwords(str_replace('-',' ',Request::segment($i)))}}
+                    @else {{ trans('common.'.lcfirst(ucwords(str_replace('-',' ',Request::segment($i))))) }}
                     @endif
                     @endfor
 
@@ -37,7 +38,7 @@
                             <p>
                                 {{$company->description}}
                             </p>
-                            <a href="/companies/{{$company->id}}">
+                            <a href="/{{App::getLocale()}}/companies/{{$company->id}}">
                                 {{ trans('common.more') }}
                             </a>
                         </div>
